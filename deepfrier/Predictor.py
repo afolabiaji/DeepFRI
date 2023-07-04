@@ -209,7 +209,7 @@ class Predictor(object):
         with open(output_fn, 'w') as csvFile:
             writer = csv.writer(csvFile, delimiter=',', quotechar='"')
             writer.writerow(['### Predictions made by DeepFRI.'])
-            writer.writerow(['Protein', 'GO_term/EC_number', 'Score', 'GO_term/EC_number name'])
+            writer.writerow(['Protein', 'GO_term/EC_number', 'Score'])
             if verbose:
                 print ('Protein', 'GO-term/EC-number', 'Score', 'GO-term/EC-number name')
             for prot in self.prot2goterms:
@@ -217,7 +217,7 @@ class Predictor(object):
                 for row in sorted_rows:
                     if verbose:
                         print (prot, row[0], '{:.5f}'.format(row[2]), row[1])
-                    writer.writerow([prot, row[0], '{:.5f}'.format(row[2]), row[1]])
+                    writer.writerow([prot, row[0], '{:.5f}'.format(row[2])])
         csvFile.close()
 
     def compute_GradCAM(self, layer_name='GCNN_concatenate', use_guided_grads=False):
